@@ -1,0 +1,2 @@
+Documentation: [ 'docs/' ]
+Maintenance: [ '.github/', '*.md', 'Makefile', 'docker-compose.yaml', 'Dockerfile', 'helm/' ]

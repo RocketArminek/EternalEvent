@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  gradle:
+    image: gradle
+    working_dir: /EternalEvent
+    volumes:
+      - .:/EternalEvent
