@@ -20,10 +20,16 @@ kotlin {
         }
     }
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation("com.eventstore:db-client-java:4.0.0")
+                implementation("com.google.code.gson:gson:2.10")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+                implementation("org.slf4j:slf4j-simple:2.0.4")
             }
         }
         val jvmMain by getting
