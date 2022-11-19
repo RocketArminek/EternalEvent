@@ -15,4 +15,3 @@ class DefaultEventSourcedRepository<StreamId, Event : IdentifiableStream<StreamI
     }
 
 }
-class EventSourcedAggregateNotFound(message: String): IllegalArgumentException(message)
