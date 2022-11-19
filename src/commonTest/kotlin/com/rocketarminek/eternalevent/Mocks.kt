@@ -1,6 +1,6 @@
 package com.rocketarminek.eternalevent
 
-internal class User: EventSourcedAggregate<String, Event> {
+internal class User: EventSourcedAggregate<Event> {
     lateinit var id: String
         private set
     lateinit var name: String
@@ -15,8 +15,6 @@ internal class User: EventSourcedAggregate<String, Event> {
         }
     }
 
-    override fun id(): String = this.id
-
     private fun handle(event: Created) {
         this.id = event.id
         this.name = event.name
@@ -24,7 +22,7 @@ internal class User: EventSourcedAggregate<String, Event> {
 }
 
 internal data class Created(val id: String, val name: String): Event {
-    override fun id(): String = this.id
+    override fun streamId(): String = this.id
 }
 
-internal interface Event: Identifiable<String>
+internal interface Event: IdentifiableStream<String>

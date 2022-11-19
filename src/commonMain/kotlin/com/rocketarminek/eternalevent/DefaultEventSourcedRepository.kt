@@ -1,17 +1,17 @@
 package com.rocketarminek.eternalevent
 
-class DefaultEventSourcedRepository<Id, Event : Identifiable<Id>, Resource : EventSourcedAggregate<Id, Event>>(
-    private val eventStore: EventStore<Id, Event>,
+class DefaultEventSourcedRepository<StreamId, Event : IdentifiableStream<StreamId>, Resource : EventSourcedAggregate<Event>>(
+    private val eventStore: EventStore<StreamId, Event>,
     private val factory: (events: List<Event>) -> Resource
-) : EventSourcedRepository<Id, Event, Resource> {
+) : EventSourcedRepository<StreamId, Event, Resource> {
 
     override fun save(resource: Resource) = this.eventStore.save(resource.commit())
 
-    override fun get(id: Id): Resource {
-        val events = this.eventStore.load(id)
-        if (events.isEmpty()) throw EventSourcedAggregateNotFound("Resource with $id not found!")
+    override fun get(streamId: StreamId): Resource {
+        val events = this.eventStore.load(streamId)
+        if (events.isEmpty()) throw EventSourcedAggregateNotFound("Resource for $streamId not found!")
 
-        return this.factory(this.eventStore.load(id))
+        return this.factory(this.eventStore.load(streamId))
     }
 
 }

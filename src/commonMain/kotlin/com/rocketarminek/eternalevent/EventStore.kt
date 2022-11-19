@@ -1,6 +1,6 @@
 package com.rocketarminek.eternalevent
 
-interface EventStore<Id, Event: Identifiable<Id>> {
+interface EventStore<StreamId, Event: IdentifiableStream<StreamId>> {
     fun save(events: List<Event>)
-    fun load(id: Id): List<Event>
+    fun load(streamId: StreamId): List<Event>
 }

@@ -1,6 +1,6 @@
 package com.rocketarminek.eternalevent
 
-abstract class EventSourcedAggregate<Id, Event>(): ContainsUncommittedChanges<Event>, Identifiable<Id> {
+abstract class EventSourcedAggregate<Event>(): ContainsUncommittedChanges<Event> {
     private val uncommittedChanges: MutableList<Event> = mutableListOf()
 
     constructor(events: List<Event>) : this() {

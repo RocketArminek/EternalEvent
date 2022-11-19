@@ -1,6 +1,6 @@
 package com.rocketarminek.eternalevent
 
-interface EventSourcedRepository<Id, Event : Identifiable<Id>, Resource : EventSourcedAggregate<Id, Event>> {
+interface EventSourcedRepository<StreamId, Event : IdentifiableStream<StreamId>, Resource : EventSourcedAggregate<Event>> {
     fun save(resource: Resource)
-    fun get(id: Id): Resource
+    fun get(streamId: StreamId): Resource
 }
